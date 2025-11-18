@@ -3,7 +3,14 @@ import { Song } from "../types";
 import { Language } from "../i18n";
 
 const getAiClient = () => {
-    return new GoogleGenAI({ apiKey: import.meta.env.VITE_GEMINI_API_KEY });
+    const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+    
+    if (!apiKey) {
+        throw new Error('VITE_GEMINI_API_KEY environment variable is not set. Please check your Vercel environment variables.');
+    }
+    
+    console.log('Creating Gemini client with API key:', apiKey ? '***' + apiKey.slice(-4) : 'undefined');
+    return new GoogleGenAI({ apiKey });
 };
 
 export interface StoryKeywords {
