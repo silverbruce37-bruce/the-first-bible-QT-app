@@ -31,7 +31,12 @@ const App: React.FC = () => {
   useEffect(() => {
     const checkApiKey = async () => {
         setIsCheckingApiKey(true);
+        // Check if running in AI Studio environment
         if (window.aistudio && await window.aistudio.hasSelectedApiKey()) {
+            setApiKeySelected(true);
+        }
+        // Check for Vite environment variable (for Vercel deployment)
+        else if (import.meta.env.VITE_GEMINI_API_KEY) {
             setApiKeySelected(true);
         }
         setIsCheckingApiKey(false);
