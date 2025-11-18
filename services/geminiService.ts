@@ -3,7 +3,7 @@ import { Song } from "../types";
 import { Language } from "../i18n";
 
 const getAiClient = () => {
-    return new GoogleGenAI({ apiKey: process.env.API_KEY });
+    return new GoogleGenAI({ apiKey: import.meta.env.VITE_GEMINI_API_KEY });
 };
 
 export interface StoryKeywords {
