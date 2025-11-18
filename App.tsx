@@ -30,16 +30,50 @@ const App: React.FC = () => {
 
   useEffect(() => {
     const checkApiKey = async () => {
+        console.log('Starting API key check...');
         setIsCheckingApiKey(true);
-        // Check if running in AI Studio environment
-        if (window.aistudio && await window.aistudio.hasSelectedApiKey()) {
-            setApiKeySelected(true);
+        
+        try {
+            // Check if running in AI Studio environment
+            console.log('Checking AI Studio...');
+            if (window.aistudio) {
+                console.log('AI Studio found, checking for API key...');
+                const hasKey = await window.aistudio.hasSelectedApiKey();
+                if (hasKey) {
+                    console.log('AI Studio API key found');
+                    setApiKeySelected(true);
+                    setIsCheckingApiKey(false);
+                    return;
+                }
+            }
+            
+            // Check for Vite environment variable (for Vercel deployment)
+            console.log('Checking environment variable...');
+            const envKey = import.meta.env.VITE_GEMINI_API_KEY;
+            console.log('Environment key exists:', !!envKey);
+            
+            if (envKey) {
+                console.log('Environment API key found');
+                setApiKeySelected(true);
+            } else {
+                console.log('No API key found, showing selection screen');
+                setApiKeySelected(false);
+            }
+        } catch (error) {
+            console.error('Error checking API key:', error);
+            // If there's an error, check for environment variable as fallback
+            const envKey = import.meta.env.VITE_GEMINI_API_KEY;
+            if (envKey) {
+                console.log('Fallback: Environment API key found');
+                setApiKeySelected(true);
+            } else {
+                console.log('Fallback: No API key found');
+                setApiKeySelected(false);
+            }
         }
-        // Check for Vite environment variable (for Vercel deployment)
-        else if (import.meta.env.VITE_GEMINI_API_KEY) {
-            setApiKeySelected(true);
-        }
+        
         setIsCheckingApiKey(false);
+        console.log('API key check complete');
     };
     checkApiKey();
   }, []);
