@@ -4,10 +4,10 @@ export type Language = 'ko' | 'en';
 
 export const translations = {
   ko: {
-    appName: "주님과 함께하는 묵상일기, 회복과 소망으로",
+    appName: "본어게인 주님과 함께하는 묵상일기, 회복과 소망으로",
     appDescription: "바울서신 매일 읽기 및 묵상, 회개와 결단, 전도의 삶을 기록하는 신앙 성장 앱입니다. 제미나이 AI가 당신의 묵상과 전도 계획을 돕습니다.",
     headerSubtitle: "'선한 영' 묵상일기: 주님과 함께 회복과 소망으로",
-    headerTitle: "본 어게인 소망일기",
+    headerTitle: "본어게인 소망일기",
     todaysWord: "오늘의 말씀",
     navReading: "읽기 & 묵상",
     navDiary: "신앙 일기",

@@ -217,7 +217,7 @@ export async function generateComprehensiveReadingContent(book: string, chapter1
     const ai = getAiClient();
     const p = getPrompts(language, book, chapter1, chapter2);
     const response = await ai.models.generateContent({
-      model: 'gemini-2.5-pro',
+      model: 'gemini-2.5-flash',
       contents: p.comprehensiveReading,
       config: {
         responseMimeType: "application/json",
@@ -383,7 +383,7 @@ export async function recommendMusic(context: string, language: Language): Promi
     const p = getPrompts(language, '', 0, 0, undefined, context);
     
     const response = await ai.models.generateContent({
-      model: 'gemini-2.5-pro',
+      model: 'gemini-2.5-flash',
       contents: {
           parts: [{ text: p.recommendMusic }, { text: p.recommendMusicContextPrefix }]
       },
@@ -420,7 +420,7 @@ export async function generatePrayerGuide(passage: string, language: Language): 
   try {
     const p = getPrompts(language, '', 0, 0, passage);
     const response = await ai.models.generateContent({
-        model: 'gemini-2.5-pro',
+        model: 'gemini-2.5-flash',
         contents: p.prayerGuide,
     });
 
@@ -436,7 +436,7 @@ export async function generateSermonOutline(passage: string, language: Language)
   try {
     const p = getPrompts(language, '', 0, 0, passage);
     const response = await ai.models.generateContent({
-        model: 'gemini-2.5-pro',
+        model: 'gemini-2.5-flash',
         contents: p.sermonOutline,
     });
 
@@ -486,7 +486,7 @@ export async function explainPassageSelection(selectedText: string, passageConte
   try {
     const p = getPrompts(language, '', 0, 0, selectedText, passageContext);
     const response = await ai.models.generateContent({
-        model: 'gemini-2.5-pro',
+        model: 'gemini-2.5-flash',
         contents: p.explainSelection,
     });
 

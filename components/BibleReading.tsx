@@ -137,10 +137,10 @@ const BibleReading: React.FC<BibleReadingProps> = ({ reading, onPassageLoaded })
   const formatText = (text: string) => {
     return text.split('\n').map((line, index) => {
       if (line.match(/^\d+\./) || line.match(/^\d+:/) || line.match(/^\d+\s/)) {
-        return <p key={index} className="mb-2"><span className="font-semibold text-sky-400 mr-2">{line.split(' ')[0]}</span>{line.substring(line.indexOf(' ') + 1)}</p>;
+        return <p key={index} className="mb-2"><span className="font-semibold text-emerald-500 mr-2">{line.split(' ')[0]}</span>{line.substring(line.indexOf(' ') + 1)}</p>;
       }
       if(line.startsWith('**') && line.endsWith('**')) {
-        return <h3 key={index} className="text-xl font-bold text-slate-200 mt-4 mb-2">{line.replace(/\*\*/g, '')}</h3>
+        return <h3 key={index} className="text-xl font-bold text-emerald-800 mt-4 mb-2">{line.replace(/\*\*/g, '')}</h3>
       }
       return <p key={index} className="mb-2">{line}</p>;
     });
@@ -280,7 +280,8 @@ const BibleReading: React.FC<BibleReadingProps> = ({ reading, onPassageLoaded })
 
         // After loading text, fetch the image
         if (cachedData.imagePrompt) {
-          fetchImageAndUpdateState(cachedData.imagePrompt, cachedData.intention);
+          // fetchImageAndUpdateState(cachedData.imagePrompt, cachedData.intention);
+          setIsImageLoading(false);
         } else {
           setIsImageLoading(false);
         }
@@ -314,7 +315,8 @@ const BibleReading: React.FC<BibleReadingProps> = ({ reading, onPassageLoaded })
 
       // Fetch the image
       if (comprehensiveData.imagePrompt) {
-        fetchImageAndUpdateState(comprehensiveData.imagePrompt, comprehensiveData.intention);
+        // fetchImageAndUpdateState(comprehensiveData.imagePrompt, comprehensiveData.intention);
+        setIsImageLoading(false);
       } else {
         setIsImageLoading(false);
       }
@@ -358,10 +360,10 @@ const BibleReading: React.FC<BibleReadingProps> = ({ reading, onPassageLoaded })
     <div className="space-y-6">
        <Card>
         <div className="flex justify-between items-center">
-          <h2 className="text-2xl font-bold text-slate-100">{t('readingPlanTitle')}</h2>
+          <h2 className="text-2xl font-bold text-emerald-900">{t('readingPlanTitle')}</h2>
           <button
             onClick={() => setIsTocVisible(!isTocVisible)}
-            className="flex items-center px-3 py-1 text-sm bg-slate-700 text-slate-300 rounded-lg hover:bg-slate-600 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-800 focus:ring-sky-500"
+            className="flex items-center px-3 py-1 text-sm bg-white border border-emerald-100 shadow-sm text-emerald-700 rounded-lg hover:bg-emerald-50 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-rose-400"
           >
             {isTocVisible ? (
               <>
@@ -381,15 +383,15 @@ const BibleReading: React.FC<BibleReadingProps> = ({ reading, onPassageLoaded })
           </button>
         </div>
         {isTocVisible && (
-          <div className="mt-4 border-t border-slate-700 pt-4">
-              <p className="text-sm text-slate-400 mb-2">
+          <div className="mt-4 border-t border-emerald-100/60 pt-4">
+              <p className="text-sm text-emerald-600/80 mb-2">
                 {readingPlanInfoParts.map((part, i) => {
-                    if (part === 'totalDays') return <strong key={i} className="text-sky-400">{totalDays}</strong>;
-                    if (part === 'currentDay') return <strong key={i} className="text-sky-400">{currentDay}</strong>;
+                    if (part === 'totalDays') return <strong key={i} className="text-rose-500">{totalDays}</strong>;
+                    if (part === 'currentDay') return <strong key={i} className="text-rose-500">{currentDay}</strong>;
                     return <span key={i}>{part}</span>
                 })}
               </p>
-              <div className="text-sm text-slate-400 mb-3 p-2 bg-slate-900 rounded-md border border-slate-700">
+              <div className="text-sm text-emerald-700 mb-3 p-3 bg-emerald-50/50 rounded-xl border border-emerald-100/80">
                 <strong>{t('meditationRecordGuide')}</strong> {t('meditationRecordInstruction')}
                 <br />
                 <span className="font-semibold text-green-400">{t('meditationGood').split(': ')[0]}:</span> {t('meditationGood').split(': ')[1]},{' '}
@@ -404,23 +406,23 @@ const BibleReading: React.FC<BibleReadingProps> = ({ reading, onPassageLoaded })
                     
                     const liClasses = ['p-2 rounded-md transition-all text-sm flex justify-between items-center'];
 
-                    if (status === 'good') liClasses.push('bg-green-500/10 text-green-400');
-                    else if (status === 'ok') liClasses.push('bg-amber-500/10 text-amber-400');
-                    else if (status === 'bad') liClasses.push('bg-red-500/10 text-red-400');
-                    else if (item.day === currentDay) liClasses.push('bg-sky-500/10 text-sky-400 font-bold');
-                    else liClasses.push('text-slate-300');
+                    if (status === 'good') liClasses.push('bg-green-100 text-green-700');
+                    else if (status === 'ok') liClasses.push('bg-amber-100 text-amber-700');
+                    else if (status === 'bad') liClasses.push('bg-rose-100 text-rose-700');
+                    else if (item.day === currentDay) liClasses.push('bg-emerald-100/50 text-emerald-800 font-bold');
+                    else liClasses.push('text-stone-600');
                     
-                    if(item.day === currentDay) liClasses.push('ring-2 ring-sky-400');
+                    if(item.day === currentDay) liClasses.push('ring-2 ring-emerald-400');
 
                     return (
                         <li key={item.day} className={liClasses.join(' ')}>
                             <div className="flex items-center flex-grow">
-                                <span className="font-mono mr-3 text-slate-500 w-20 inline-block">{t('day', {day: item.day})}:</span>
+                                <span className="font-mono mr-3 text-emerald-400 font-bold w-20 inline-block">{t('day', {day: item.day})}:</span>
                                 <span>{item.reading}</span>
                                 {isArchived && (
                                     <button
                                         onClick={() => setViewingArchivedDay(item.day)}
-                                        className="ml-4 px-2 py-0.5 text-xs bg-slate-600 text-slate-300 rounded hover:bg-slate-500 transition-colors focus:outline-none focus:ring-1 focus:ring-sky-500"
+                                        className="ml-4 px-2 py-0.5 text-xs bg-white text-emerald-600 border border-emerald-100 rounded-md shadow-sm hover:bg-emerald-50 transition-colors focus:outline-none focus:ring-1 focus:ring-rose-400"
                                         title={t('reviewButton')}
                                     >
                                         {t('reviewButton')}
@@ -458,15 +460,15 @@ const BibleReading: React.FC<BibleReadingProps> = ({ reading, onPassageLoaded })
       </Card>
       <Card>
         <div className="flex justify-between items-center mb-4">
-            <h2 className="text-2xl font-bold text-slate-100">{t('todaysPassage')}</h2>
+            <h2 className="text-2xl font-bold text-emerald-900">{t('todaysPassage')}</h2>
             {!isLoading && passage && (
                 <button
                 onClick={() => handleCopy(passage, setIsPassageCopied)}
-                className="flex items-center px-3 py-1 text-sm bg-slate-700 text-slate-300 rounded-lg hover:bg-slate-600 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-800 focus:ring-sky-500"
+                className="flex items-center px-3 py-1 text-sm bg-white border border-emerald-100/50 text-emerald-600 rounded-lg hover:bg-emerald-50 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-rose-400"
                 >
                 {isPassageCopied ? (
                     <>
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2 text-green-400" viewBox="0 0 20 20" fill="currentColor">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2 text-rose-400" viewBox="0 0 20 20" fill="currentColor">
                         <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
                     <span>{t('copied')}</span>
@@ -486,7 +488,7 @@ const BibleReading: React.FC<BibleReadingProps> = ({ reading, onPassageLoaded })
           <div
             ref={passageContainerRef}
             onMouseUp={handleMouseUp}
-            className="max-h-[50vh] overflow-y-auto p-4 bg-slate-900 rounded-lg text-slate-300 leading-loose relative"
+            className="max-h-[50vh] overflow-y-auto p-4 bg-[#f8faf6] rounded-xl text-stone-700 leading-loose relative border border-emerald-50 shadow-inner custom-scrollbar"
           >
             {selectionPopover.visible && (
               <button
@@ -513,14 +515,14 @@ const BibleReading: React.FC<BibleReadingProps> = ({ reading, onPassageLoaded })
       )}
 
       <Card>
-        <h2 className="text-2xl font-bold text-slate-100 mb-4 flex items-center">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 inline-block mr-3 text-sky-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+        <h2 className="text-2xl font-bold text-emerald-900 mb-4 flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 inline-block mr-3 text-rose-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
             <span>{t('lordsWill')}</span>
         </h2>
         {isLoading ? <Spinner message={t('analyzingIntent')} /> : error ? null : (
-            <div className="text-slate-300 space-y-4 whitespace-pre-wrap leading-relaxed">
+            <div className="text-stone-700 space-y-4 whitespace-pre-wrap leading-relaxed bg-emerald-50/50 p-6 rounded-2xl border border-emerald-100 shadow-sm">
             {passageIntention}
             </div>
         )}
@@ -528,15 +530,15 @@ const BibleReading: React.FC<BibleReadingProps> = ({ reading, onPassageLoaded })
 
       <Card>
         <div className="flex justify-between items-center mb-4">
-            <h2 className="text-2xl font-bold text-slate-100">{t('meditationGuide')}</h2>
+            <h2 className="text-2xl font-bold text-emerald-900">{t('meditationGuide')}</h2>
             {!isLoading && meditationGuide && (
                 <button
                 onClick={() => handleCopy(meditationGuide, setIsCopied)}
-                className="flex items-center px-3 py-1 text-sm bg-slate-700 text-slate-300 rounded-lg hover:bg-slate-600 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-800 focus:ring-sky-500"
+                className="flex items-center px-3 py-1 text-sm bg-white border border-emerald-100/50 text-emerald-600 rounded-lg hover:bg-emerald-50 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-rose-400"
                 >
                 {isCopied ? (
                     <>
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2 text-green-400" viewBox="0 0 20 20" fill="currentColor">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2 text-rose-400" viewBox="0 0 20 20" fill="currentColor">
                         <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
                     <span>{t('copied')}</span>
@@ -553,14 +555,14 @@ const BibleReading: React.FC<BibleReadingProps> = ({ reading, onPassageLoaded })
             )}
         </div>
         {isLoading ? <Spinner message={t('generatingGuide')} /> : error ? null : (
-          <div className="text-slate-300 space-y-4 whitespace-pre-wrap leading-relaxed">
+          <div className="text-stone-700 space-y-4 whitespace-pre-wrap leading-relaxed">
             {formatText(meditationGuide)}
           </div>
         )}
       </Card>
       <Card>
-        <h2 className="text-2xl font-bold text-slate-100 mb-4 flex items-center">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 inline-block mr-3 text-sky-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+        <h2 className="text-2xl font-bold text-emerald-900 mb-4 flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 inline-block mr-3 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9V3m0 18a9 9 0 009-9m-9 9a9 9 0 00-9-9" />
             </svg>
             <span>{t('timeAndPlace')}</span>
@@ -568,16 +570,16 @@ const BibleReading: React.FC<BibleReadingProps> = ({ reading, onPassageLoaded })
         {isLoading ? <Spinner message={t('generatingBg')} /> : error ? null : (
           <div>
             {isImageLoading && (
-                <div className="w-full bg-slate-700 rounded-lg h-64 mb-4 flex items-center justify-center">
+                <div className="w-full bg-emerald-50 rounded-2xl h-64 mb-4 flex items-center justify-center border border-emerald-100">
                    <Spinner message={t('generatingBgImage')} />
                 </div>
             )}
             {contextImageUrl && !isImageLoading && (
-                <div className="mb-4 rounded-lg overflow-hidden shadow-lg">
+                <div className="mb-4 rounded-2xl overflow-hidden shadow-md shadow-emerald-900/5">
                     <img src={contextImageUrl} alt={t('biblicalContextAlt')} className="w-full h-auto object-cover" />
                 </div>
             )}
-            <div className="text-slate-300 space-y-4 whitespace-pre-wrap leading-relaxed">
+            <div className="text-stone-700 space-y-4 whitespace-pre-wrap leading-relaxed">
               {passageContext}
             </div>
           </div>
@@ -589,7 +591,7 @@ const BibleReading: React.FC<BibleReadingProps> = ({ reading, onPassageLoaded })
             <button
                 onClick={handleCompleteReading}
                 disabled={isLoading || isSaving || isTodayArchived}
-                className="w-full md:w-auto px-8 py-4 bg-green-600 text-white font-bold text-lg rounded-lg shadow-lg hover:bg-green-700 transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-800 focus:ring-green-500 disabled:bg-slate-600 disabled:cursor-not-allowed disabled:shadow-none flex items-center justify-center mx-auto"
+                className="w-full md:w-auto px-8 py-4 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white font-bold text-lg rounded-[1.25rem] shadow-lg hover:shadow-[0_10px_25px_rgb(20,160,144,0.35)] transition-all duration-300 hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-800 focus:ring-emerald-500 disabled:bg-slate-600 disabled:bg-none disabled:cursor-not-allowed disabled:shadow-none flex items-center justify-center mx-auto"
             >
                 {isSaving ? (
                     <>

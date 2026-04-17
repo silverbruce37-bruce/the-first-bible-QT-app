@@ -157,13 +157,14 @@ const App: React.FC = () => {
   const NavButton = ({ tab, label }: { tab: ActiveTab; label: string }) => (
     <button
       onClick={() => setActiveTab(tab)}
-      className={`flex-1 py-3 px-2 text-sm md:text-base font-semibold transition-colors duration-300 rounded-t-lg ${
+      className={`flex-1 py-3 px-2 text-sm md:text-base font-semibold transition-all duration-300 rounded-t-xl overflow-hidden relative group ${
         activeTab === tab 
-          ? 'bg-slate-800 text-sky-400' 
-          : 'bg-sky-800 text-sky-200 hover:bg-sky-700'
+          ? 'bg-white/90 text-emerald-700 shadow-[0_-4px_20px_-5px_rgba(20,160,144,0.15)] border-t-2 border-emerald-400 border-x border-white/50 backdrop-blur transform -translate-y-1' 
+          : 'bg-emerald-50/30 text-emerald-700/60 hover:bg-emerald-50/80 hover:text-emerald-700 hover:-translate-y-0.5'
       }`}
     >
-      {label}
+      <span className="relative z-10">{label}</span>
+      {activeTab !== tab && <div className="absolute inset-0 bg-gradient-to-t from-white/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />}
     </button>
   );
 
@@ -171,7 +172,7 @@ const App: React.FC = () => {
     <button
       onClick={() => setLanguage(lang)}
       className={`px-3 py-1 text-xs rounded-md transition-colors ${
-        language === lang ? 'bg-sky-200 text-sky-800 font-bold' : 'bg-transparent text-sky-200 hover:bg-sky-700'
+        language === lang ? 'bg-emerald-100 text-emerald-800 font-bold shadow-sm' : 'bg-transparent text-emerald-600 hover:bg-emerald-50'
       }`}
     >
       {label}
@@ -202,47 +203,23 @@ const App: React.FC = () => {
     );
   }
 
-  if (isCheckingApiKey) {
-    return (
-      <div className="min-h-screen bg-slate-900 flex items-center justify-center">
-        <Spinner message={t('loading')} />
-      </div>
-    );
-  }
 
-  if (!apiKeySelected) {
-    return (
-      <div className="min-h-screen bg-slate-900 flex items-center justify-center text-center text-slate-300 p-4">
-        <div className="max-w-md">
-            <h1 className="text-3xl font-bold text-white mb-4">{t('apiKeyRequiredTitle')}</h1>
-            <p className="mb-6">{t('apiKeyRequiredMessage')}</p>
-            <button
-                onClick={handleSelectApiKey}
-                className="w-full px-6 py-3 bg-sky-600 text-white font-semibold rounded-lg hover:bg-sky-700 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-900 focus:ring-sky-500"
-            >
-                {t('selectApiKeyButton')}
-            </button>
-            <p className="text-xs text-slate-500 mt-4" dangerouslySetInnerHTML={{ __html: t('billingInfoLink') }} />
-        </div>
-      </div>
-    );
-  }
 
   return (
-    <div className="min-h-screen bg-slate-900 font-sans text-slate-300">
-      <header className="bg-sky-800 text-white shadow-lg sticky top-0 z-10">
+    <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-white to-rose-50 font-sans text-stone-700 transition-colors duration-500">
+      <header className="bg-white/70 backdrop-blur-xl text-emerald-900 shadow-sm border-b border-white/50 sticky top-0 z-20">
         <div className="container mx-auto px-4 pt-4 pb-2 text-center relative">
           <div className="absolute top-3 left-4">
-            <span className="font-bold text-white tracking-widest text-sm uppercase">Live in Wonder</span>
+            <span className="font-bold text-emerald-800 tracking-widest text-sm uppercase opacity-90">Live in Wonder</span>
           </div>
-          <div className="absolute top-2 right-2 flex space-x-1 border border-sky-600 rounded-lg p-0.5">
+          <div className="absolute top-2 right-2 flex space-x-1 border border-emerald-200 rounded-lg p-0.5 bg-white/50">
             <LanguageButton lang="ko" label={t('korean')} />
             <LanguageButton lang="en" label={t('english')} />
           </div>
-          <p className="text-sm md:text-base text-sky-200">{t('headerSubtitle')}</p>
-          <h1 className="text-4xl md:text-5xl font-bold mt-1 tracking-wider">{t('headerTitle')}</h1>
-          <p className="mt-4 text-sky-200">{todayDateString}</p>
-          <p className="mt-1 font-semibold text-lg">{t('todaysWord')}: {readingRef}</p>
+          <p className="text-sm md:text-base text-emerald-600/80 font-medium tracking-wide">{t('headerSubtitle')}</p>
+          <h1 className="text-4xl md:text-5xl font-extrabold mt-1 tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-emerald-700 via-emerald-500 to-rose-500 drop-shadow-sm animate-pulse-soft">{t('headerTitle')}</h1>
+          <p className="mt-4 text-emerald-700 font-medium">{todayDateString}</p>
+          <p className="mt-1 font-semibold text-lg text-rose-500">{t('todaysWord')}: {readingRef}</p>
         </div>
         <nav className="container mx-auto px-2 md:px-4 flex justify-around mt-4">
           <NavButton tab="reading" label={t('navReading')} />
@@ -251,7 +228,7 @@ const App: React.FC = () => {
         </nav>
       </header>
 
-      <main className="container mx-auto p-4 md:p-6">
+      <main className="container mx-auto p-4 md:p-6 mb-8 animate-fade-in">
         {activeTab === 'reading' && (
           <ErrorBoundary>
             <BibleReading reading={dailyReading} onPassageLoaded={setPassage} />
@@ -267,13 +244,13 @@ const App: React.FC = () => {
             {passage ? (
               <EvangelismMission passage={passage} storageKey={`mission-${storageKey}`}/>
             ) : (
-              <div className="text-center p-8 bg-slate-800 rounded-lg">{t('readingFirst')}</div>
+              <div className="text-center p-8 bg-white/80 rounded-2xl shadow-sm text-stone-500 font-medium">{t('readingFirst')}</div>
             )}
           </ErrorBoundary>
         )}
       </main>
 
-      <footer className="text-center py-6 text-slate-400">
+      <footer className="text-center py-8 text-emerald-700/60 font-medium text-sm border-t border-emerald-100/50 mt-12 bg-white/30 backdrop-blur-sm">
         <p>{t('footer', { year: new Date().getFullYear() })}</p>
       </footer>
       <DebugInfo />

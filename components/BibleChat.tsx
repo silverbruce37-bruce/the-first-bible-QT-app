@@ -40,7 +40,7 @@ const BibleChat: React.FC<BibleChatProps> = ({ passage }) => {
   useEffect(() => {
     if (!passage || !isOnline) return;
 
-    const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+    const ai = new GoogleGenAI({ apiKey: import.meta.env.VITE_GEMINI_API_KEY });
 
     const systemInstruction = language === 'ko' 
       ? `당신은 성경 본문을 깊이 있게 이해하도록 돕는 친절하고 지혜로운 안내자입니다. 사용자가 제공된 본문에 대해 질문하면, 그 본문의 내용에 근거하여 명확하고 이해하기 쉽게 설명해 주세요. 신학적으로 건전한 답변을 제공해야 합니다.`

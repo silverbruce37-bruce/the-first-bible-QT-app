@@ -113,10 +113,10 @@ const FaithDiary: React.FC<FaithDiaryProps> = ({ storageKey }) => {
   return (
     <div className="space-y-6">
       <Card>
-        <h2 className="text-2xl font-bold text-slate-100 mb-4">{t('diaryTitle')}</h2>
+        <h2 className="text-2xl font-bold text-emerald-900 mb-4">{t('diaryTitle')}</h2>
         <div className="space-y-6">
           <div>
-            <label htmlFor="repentance" className="block text-lg font-semibold text-slate-100 mb-2">
+            <label htmlFor="repentance" className="block text-lg font-semibold text-emerald-800 mb-2">
               {t('repentanceLabel')}
             </label>
             <textarea
@@ -124,12 +124,12 @@ const FaithDiary: React.FC<FaithDiaryProps> = ({ storageKey }) => {
               rows={5}
               value={currentEntry.repentance}
               onChange={(e) => handleChange('repentance', e.target.value)}
-              className="w-full p-3 bg-slate-700 text-slate-200 border border-slate-600 rounded-lg focus:ring-2 focus:ring-sky-400 focus:border-sky-400 transition placeholder-slate-400"
+              className="w-full p-3 bg-[#f8faf6] text-stone-700 border border-emerald-100 rounded-xl focus:ring-2 focus:ring-rose-300 focus:border-rose-300 transition placeholder-emerald-300/80 shadow-inner"
               placeholder={t('repentancePlaceholder')}
             />
           </div>
           <div>
-            <label htmlFor="resolve" className="block text-lg font-semibold text-slate-100 mb-2">
+            <label htmlFor="resolve" className="block text-lg font-semibold text-emerald-800 mb-2">
               {t('resolveLabel')}
             </label>
             <textarea
@@ -137,12 +137,12 @@ const FaithDiary: React.FC<FaithDiaryProps> = ({ storageKey }) => {
               rows={5}
               value={currentEntry.resolve}
               onChange={(e) => handleChange('resolve', e.target.value)}
-              className="w-full p-3 bg-slate-700 text-slate-200 border border-slate-600 rounded-lg focus:ring-2 focus:ring-sky-400 focus:border-sky-400 transition placeholder-slate-400"
+              className="w-full p-3 bg-[#f8faf6] text-stone-700 border border-emerald-100 rounded-xl focus:ring-2 focus:ring-rose-300 focus:border-rose-300 transition placeholder-emerald-300/80 shadow-inner"
               placeholder={t('resolvePlaceholder')}
             />
           </div>
           <div>
-            <label htmlFor="dream" className="block text-lg font-semibold text-slate-100 mb-2">
+            <label htmlFor="dream" className="block text-lg font-semibold text-emerald-800 mb-2">
               {t('dreamLabel')}
             </label>
             <textarea
@@ -150,7 +150,7 @@ const FaithDiary: React.FC<FaithDiaryProps> = ({ storageKey }) => {
               rows={5}
               value={currentEntry.dream}
               onChange={(e) => handleChange('dream', e.target.value)}
-              className="w-full p-3 bg-slate-700 text-slate-200 border border-slate-600 rounded-lg focus:ring-2 focus:ring-sky-400 focus:border-sky-400 transition placeholder-slate-400"
+              className="w-full p-3 bg-[#f8faf6] text-stone-700 border border-emerald-100 rounded-xl focus:ring-2 focus:ring-rose-300 focus:border-rose-300 transition placeholder-emerald-300/80 shadow-inner"
               placeholder={t('dreamPlaceholder')}
             />
           </div>
@@ -158,28 +158,28 @@ const FaithDiary: React.FC<FaithDiaryProps> = ({ storageKey }) => {
         <div className="text-right mt-6">
           <button
             onClick={handleSave}
-            className="px-6 py-2 bg-sky-600 text-white font-semibold rounded-lg hover:bg-sky-700 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-800 focus:ring-sky-500"
+            className="px-6 py-2.5 bg-gradient-to-r from-rose-400 to-rose-600 text-white font-bold rounded-xl shadow-md hover:shadow-[0_8px_20px_rgb(250,79,70,0.3)] transition-all duration-300 hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-rose-500"
           >
             {isSaved ? t('saved') : t('saveDiaryButton')}
           </button>
         </div>
 
-        <div className="mt-8 border-t border-slate-700 pt-6">
-          <h3 className="text-xl font-bold text-slate-100 mb-4">{t('todaysRecord')}</h3>
+        <div className="mt-8 border-t border-emerald-100/60 pt-6">
+          <h3 className="text-xl font-bold text-emerald-900 mb-4">{t('todaysRecord')}</h3>
           {isSyncing ? (
             <Spinner message={t('syncingEntries')} />
           ) : savedEntries.length === 0 ? (
-            <div className="text-center py-8 text-slate-400">
+            <div className="text-center py-8 text-emerald-500/70">
               <p>{t('noRecords')}</p>
               <p className="text-sm mt-1">{t('noRecordsHint')}</p>
             </div>
           ) : (
-            <div className="space-y-4 max-h-[60vh] overflow-y-auto pr-2">
+            <div className="space-y-4 max-h-[60vh] overflow-y-auto pr-2 custom-scrollbar">
               {savedEntries.map((entry) => (
-                <div key={entry.id} className="bg-slate-700/50 p-5 rounded-lg border border-slate-700 transition-shadow hover:bg-slate-700">
-                  <div className="flex justify-between items-center mb-4 border-b border-slate-600 pb-2">
-                    <p className="text-sm font-bold text-sky-400 flex items-center">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <div key={entry.id} className="bg-white p-5 rounded-2xl border border-emerald-50 shadow-[0_2px_10px_rgb(0,0,0,0.02)] transition-all hover:shadow-[0_4px_15px_rgb(0,128,0,0.05)]">
+                  <div className="flex justify-between items-center mb-4 border-b border-emerald-50 pb-2">
+                    <p className="text-sm font-bold text-rose-400 flex items-center">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2 text-rose-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                         <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                       </svg>
                       {t('savedAt', { time: entry.timestamp })}
@@ -188,20 +188,20 @@ const FaithDiary: React.FC<FaithDiaryProps> = ({ storageKey }) => {
                   <div className="space-y-4">
                     {entry.content.repentance && (
                       <div>
-                        <h4 className="font-semibold text-slate-300 text-base">{t('repentanceLabel')}</h4>
-                        <p className="text-slate-200 whitespace-pre-wrap mt-2 text-sm leading-relaxed">{entry.content.repentance}</p>
+                        <h4 className="font-semibold text-emerald-800 text-base">{t('repentanceLabel')}</h4>
+                        <p className="text-stone-600 whitespace-pre-wrap mt-2 text-sm leading-relaxed">{entry.content.repentance}</p>
                       </div>
                     )}
                     {entry.content.resolve && (
                       <div>
-                        <h4 className="font-semibold text-slate-300 text-base">{t('resolveLabel')}</h4>
-                        <p className="text-slate-200 whitespace-pre-wrap mt-2 text-sm leading-relaxed">{entry.content.resolve}</p>
+                        <h4 className="font-semibold text-emerald-800 text-base">{t('resolveLabel')}</h4>
+                        <p className="text-stone-600 whitespace-pre-wrap mt-2 text-sm leading-relaxed">{entry.content.resolve}</p>
                       </div>
                     )}
                     {entry.content.dream && (
                       <div>
-                        <h4 className="font-semibold text-slate-300 text-base">{t('dreamLabel')}</h4>
-                        <p className="text-slate-200 whitespace-pre-wrap mt-2 text-sm leading-relaxed">{entry.content.dream}</p>
+                        <h4 className="font-semibold text-emerald-800 text-base">{t('dreamLabel')}</h4>
+                        <p className="text-stone-600 whitespace-pre-wrap mt-2 text-sm leading-relaxed">{entry.content.dream}</p>
                       </div>
                     )}
                   </div>
