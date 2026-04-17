@@ -4,72 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Meditations with the Lord: For Restoration and Hope</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            fontFamily: {
-              sans: ['Outfit', 'sans-serif'],
-              inter: ['Inter', 'sans-serif'],
-            },
-            colors: {
-              emerald: { // Edenic Ocean Teal
-                50: '#EAFBFA',
-                100: '#CBF5F0',
-                200: '#9CEBE1',
-                300: '#62D9CB',
-                400: '#32C1B1',
-                500: '#14A090',
-                600: '#0C8074',
-                700: '#0A665D',
-                800: '#09504A',
-                900: '#08423E',
-              },
-              rose: { // Coral/Paradise Sunset
-                50: '#FFF5F5',
-                100: '#FFE6E6',
-                200: '#FFCDCC',
-                300: '#FFABA6',
-                400: '#FF7D75',
-                500: '#FA4F46',
-                600: '#DE3027',
-                700: '#BA201A',
-                800: '#921A15',
-                900: '#7A1A16',
-              }
-            },
-            animation: {
-              'float': 'float 6s ease-in-out infinite',
-              'fade-in': 'fadeIn 0.5s ease-out forwards',
-              'pulse-soft': 'pulseSoft 3s ease-in-out infinite',
-              'shimmer': 'shimmer 3s infinite linear',
-            },
-            keyframes: {
-              float: {
-                '0%, 100%': { transform: 'translateY(0)' },
-                '50%': { transform: 'translateY(-10px)' },
-              },
-              fadeIn: {
-                '0%': { opacity: '0', transform: 'translateY(-10px)' },
-                '100%': { opacity: '1', transform: 'translateY(0)' },
-              },
-              pulseSoft: {
-                '0%, 100%': { opacity: '1' },
-                '50%': { opacity: '0.7' },
-              },
-              shimmer: {
-                '0%': { backgroundPosition: '-200% 0' },
-                '100%': { backgroundPosition: '200% 0' },
-              }
-            }
-          }
-        }
-      }
-    </script>
     <style>
       /* For Webkit-based browsers (Chrome, Safari) */
       ::-webkit-scrollbar {
@@ -77,32 +12,29 @@
       }
 
       ::-webkit-scrollbar-track {
-        background: #EAFBFA; /* emerald-50 */
+        background: #0f172a; /* slate-900 */
       }
 
       ::-webkit-scrollbar-thumb {
-        background: #9CEBE1; /* emerald-200 */
+        background: #475569; /* slate-600 */
         border-radius: 4px;
       }
 
       ::-webkit-scrollbar-thumb:hover {
-        background: #62D9CB; /* emerald-300 */
+        background: #64748b; /* slate-500 */
+      }
+      
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-10px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      .animate-fade-in {
+        animation: fadeIn 0.3s ease-out forwards;
       }
     </style>
-  <script type="importmap">
-{
-  "imports": {
-    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.25.0",
-    "react/": "https://aistudiocdn.com/react@^19.2.0/",
-    "react": "https://aistudiocdn.com/react@^19.2.0",
-    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/"
-  }
-}
-</script>
-<link rel="stylesheet" href="/index.css">
 </head>
-  <body class="bg-[#f2f9f1]">
+  <body class="bg-slate-900">
     <div id="root"></div>
-    <script type="module" src="/index.tsx"></script>
+    <script type="module" src="src/index.tsx"></script>
   </body>
 </html>

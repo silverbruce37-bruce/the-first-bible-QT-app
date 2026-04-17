@@ -1,0 +1,11 @@
+{
+  "name": "returnhome-api",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.96.0",
+    "iconv-lite": "^0.7.2",
+    "node-fetch": "^3.3.2"
+  }
+}

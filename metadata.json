@@ -1,5 +1,7 @@
 {
-  "name": "Meditations with the Lord: For Restoration and Hope",
-  "description": "A faith growth app for daily reading and meditation on the Pauline Epistles, recording a life of repentance, resolution, and evangelism. Gemini AI helps with your meditation and evangelism planning.",
-  "requestFramePermissions": []
+  "name": "Copy of 귀로 : 집으로 돌아오는 길",
+  "description": "바울서신 매일 읽기 및 묵상, 회개와 결단, 전도의 삶을 기록하는 신앙 성장 앱입니다. 제미나이 AI가 당신의 묵상과 전도 계획을 돕습니다.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
 }
